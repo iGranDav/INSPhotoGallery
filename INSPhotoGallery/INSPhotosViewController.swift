@@ -187,8 +187,14 @@ public class INSPhotosViewController: UIViewController, UIPageViewControllerData
     private func setupOverlayView() {
         updateCurrentPhotosInformation()
         
+        let sBarHidden = presentingViewController?.prefersStatusBarHidden() ?? statusBarHidden
+        let statusBarHeight = sBarHidden ? 0 : UIApplication.sharedApplication().statusBarFrame.height
+      
         overlayView.view().autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        overlayView.view().frame = view.bounds
+        var frame = view.bounds
+        frame.origin.y = statusBarHeight
+        frame.size.height -= statusBarHeight
+        overlayView.view().frame = frame
         view.addSubview(overlayView.view())
         overlayView.setHidden(true, animated: false)
     }
