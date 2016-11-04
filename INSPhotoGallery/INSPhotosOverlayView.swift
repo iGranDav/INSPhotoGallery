@@ -140,6 +140,7 @@ public class INSPhotosOverlayView: UIView , INSPhotosOverlayViewable {
         navigationBar.translucent = true
         navigationBar.shadowImage = UIImage()
         navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.delegate = self
         
         navigationItem = UINavigationItem(title: "")
         navigationBar.items = [navigationItem]
@@ -171,5 +172,12 @@ public class INSPhotosOverlayView: UIView , INSPhotosOverlayViewable {
         let leadingConstraint = NSLayoutConstraint(item: captionLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 8.0)
         let trailingConstraint = NSLayoutConstraint(item: captionLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1.0, constant: 8.0)
         self.addConstraints([bottomConstraint,leadingConstraint,trailingConstraint])
+    }
+}
+
+extension INSPhotosOverlayView : UINavigationBarDelegate {
+  
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return UIBarPosition.TopAttached
     }
 }
